@@ -1,12 +1,9 @@
 const express = require('express');
-
-
+const routers = require('./routes');
 const app = express();
 
-
-app.get('/', (req, res) => {
-    res.send('<h1> App Online! </h1>');
-});
+app.use('/', routers);
 
 
-app.listen(3000, () => console.log('Servidor online na porta 3000'));
+app.listen(3000, () => console.log('App Online'));
+//npm install -- save express
