@@ -1,15 +1,34 @@
 const express = require('express');
-
+const postagensController = require('../controllers/postagens');
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    //buscar postagem no banco de dados
-    res.send('lista de postagens..')
+router.get('/', async (req, res) => {
+    const postagens = await postagensController.get();
+    res.send(postagens);
 });
 
-router.post('/', (req, res) => {
-    //enviar para banco de dados
+router.get('/:id' , async (req, res) => {
+    const id = req.params.id;
+    const postagem = await postagensController.getPorId(id);
+    res.send(postagens);
+
+})
+
+router.post('/', async(req, res) => {
+    await postagensController.create(req.body);
     res.send('Adicionado com sucesso');
+});
+
+router.put('/:id' , async (req,res) => {
+    const id = req.params.id;
+    await postagensController.update(id, req.body);
+    res.send('Alterado com sucesso.')
+});
+
+router.delete('/:id' , async (req,res) => {
+    const id = req.params.id;
+    await postagensController.delete(id);
+    res.send('Excluído com sucesso.')
 });
 
 module.exports = router;
