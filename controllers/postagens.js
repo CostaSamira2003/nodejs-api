@@ -9,7 +9,7 @@ class Postagens {
 
     async getPorId (id) {
         const postagem = await PostagemModel.find({_id: id});
-        return postagem;
+        return postagem;git
     }
 
     async create (postagemDTO){
